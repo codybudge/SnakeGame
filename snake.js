@@ -1,5 +1,5 @@
 const base = require('./base')
-Object.getOwnPropertyNames(base).map(p => global[p])
+Object.getOwnPropertyNames(base).map(p => global[p] = base[p])
 
 //Directions
 const NORTH = { x: 0, y: -1 }
