@@ -1,7 +1,10 @@
-const readLine = require('readline');
+const readline = require('readline');
 const Snake = require('./snake')
 const base =  require('./base')
 Object.getOwnPropertyNames(base).map(p => global[p] = base[p])
+
+//Mutable State
+let State = Snake.initialState()
 
 //Matrix State
 const Matrix = {
@@ -20,7 +23,7 @@ const Matrix = {
 }
 
 //Key Events
-readline.emitKeyPressEvent(process.stdin);
+readline.emitKeypressEvents(process.stdin);
 process.stdin.setRawMode(true);
 process.stdin.on('keypress', (str, key) => {
   if (key.ctrl && key.name === 'c') process.exit()
@@ -31,3 +34,9 @@ process.stdin.on('keypress', (str, key) => {
       case 'D': case 'L': case 'RIGHT': State = Snake.enqueue(State, Snake.EAST); break
     }
 });
+
+//Game Loop
+const show = () =>  console.log('\x18c' + Matrix.toString(Matrix.fromState(State)))
+const step = () => State = Snake.next(State)
+//Main
+setInterval(() => { step(); show() }, 80)
