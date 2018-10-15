@@ -12,7 +12,7 @@ const y = r => Math.round(r * canvas.height / state.rows)
 const draw = () => {
   //clear
   ctx.fillStyle = '#232323'
-  ctx.fillRect(0, 0. canvas.width, canvas.hieght)
+  ctx.fillRect(0, 0. canvas.width, canvas.height)
 
   //Draw Snake
   ctx.fillStyle = 'rgb(0,200,50)'
@@ -25,7 +25,7 @@ const draw = () => {
   //Add Crash 
   if (state.snake.length == 0) {
     ctx.fillStyle = 'rgb(255, 0, 0)'
-    ctx.fillRect(0, 0, canvas.width, canvas.hieght)
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
   }
 }
 
