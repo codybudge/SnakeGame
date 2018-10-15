@@ -55,7 +55,7 @@ const next = spec({
 })
 
 const enqueue = (state, move) => validMove(move)(state)
-  ? merge(state)({ moves: state, moves.concat([move]) })
+  ? merge(state)({ moves: state.moves.concat([move]) })
   : state
 
 module.exports = { EAST, NORTH, SOUTH, WEST, initialState, enqueue, next, }
