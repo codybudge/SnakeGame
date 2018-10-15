@@ -20,5 +20,35 @@ const draw = () => {
 
   //Draw Apples
   ctx.fillStyle = 'rgb(255, 50, 0)'
-  ctx. fillRect(x(state.apple.x), y(state.apple.y), x(1), y(1))
+  ctx.fillRect(x(state.apple.x), y(state.apple.y), x(1), y(1))
+
+  //Add Crash 
+  if (state.snake.length == 0) {
+    ctx.fillStyle = 'rgb(255, 0, 0)'
+    ctx.fillRect(0, 0, canvas.width, canvas.hieght)
+  }
 }
+
+//Game Loop Update
+const step = t1 => t2 => {
+  if (t2 - t1 > 100) {
+    state = next(state)
+    draw()
+    window.requestAnimationFrame(step(t2))
+  } else {
+    window.requestAnimationFrame(step(t1))
+  }
+}
+
+//Key Events
+window.addEventListener('keydown', e => {
+  switch (e.key) {
+    case 'w': case 'h': case 'ArrowUp': state = enqueue(state, NORTH); break
+    case 'a': case 'j': case 'ArrowLeft': state = enqueue(state, WEST); break
+    case 's': case 'k': case 'ArrowDown': state = enqueue(state, SOUTH); break
+    case 'd': case 'l': case 'ArrowRight': state = enqueue(state, EAST); break
+  }
+})
+
+//Main
+draw(); window.requestAnimationFrame(step(0))
