@@ -1,3 +1,5 @@
+const base = require ('./base')
+
 const canvas = document.getElementById('canvas')
 const ctx = canvas.getContext('2d')
 
@@ -12,7 +14,7 @@ const y = r => Math.round(r * canvas.height / state.rows)
 const draw = () => {
   //clear
   ctx.fillStyle = '#232323'
-  ctx.fillRect(0, 0. canvas.width, canvas.height)
+  ctx.fillRect(0, 0, canvas.width, canvas.height)
 
   //Draw Snake
   ctx.fillStyle = 'rgb(0,200,50)'
