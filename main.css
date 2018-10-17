@@ -9,3 +9,6 @@ html,body {
   justify-content: center;
   align-items: center;
 }
+#canvas {
+  background-color: rgb(102, 102, 102);
+}

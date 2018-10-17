@@ -17,24 +17,24 @@ const validMove = move => state =>
   state.moves[0].x + move != 0 || state.moves[0].y + move.y != 0
 
 //Next Value Based on State
-const nextMoves = state => state.moves.length > 1 ? dropFirst(state.moves) : state.moves
+const nextMoves = state => state.moves.length > 1 ? base.dropFirst(state.moves) : state.moves
 const nextApple = state => willEat(state) ? rndPos(state) : state.apple
 const nextHead = state => state.snake.length == 0
   ? { x: 2, y: 2 }
   : {
-    x: mod(state.cols)(state.snake[0].x + state.moves[0].x),
-    y: mod(state.rows)(state.snake[0].y + state.moves[0].y)
+    x: base.mod(state.cols)(state.snake[0].x + state.moves[0].x),
+    y: base.mod(state.rows)(state.snake[0].y + state.moves[0].y)
   }
 const nextSnake = state => willCrash(state)
   ? []
   : (willEat(state)
     ? [nextHead(state)].concat(state.snake)
-    : [nextHead(state)].concat(dropLast(state.snake)))
+    : [nextHead(state)].concat(base.dropLast(state.snake)))
 
 //RandomPos
 const rndPos = table => ({
-  x: rnd(0)(table.cols - 1),
-  y: rnd(0)(table.rows - 1)
+  x: base.rnd(0)(table.cols - 1),
+  y: base.rnd(0)(table.rows - 1)
 })
 
 //Initial State
@@ -46,8 +46,8 @@ const initialState = () => ({
   apple: { x: 16, y: 2 }
 })
 
-const next = spec({
-  rows: prop('rows'),
+const next = base.spec({
+  rows: base.prop('rows'),
   cols: prompt('cols'),
   moves: nextMoves,
   snake: nextSnake,
@@ -55,7 +55,7 @@ const next = spec({
 })
 
 const enqueue = (state, move) => validMove(move)(state)
-  ? merge(state)({ moves: state.moves.concat([move]) })
+  ? base.merge(state)({ moves: state.moves.concat([move]) })
   : state
 
 module.exports = { EAST, NORTH, SOUTH, WEST, initialState, enqueue, next, }
