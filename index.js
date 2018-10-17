@@ -1,4 +1,6 @@
+const Snake = require('./snake')
 const base = require ('./base')
+Object.getOwnPropertyNames(base).map(p => global[p] = base[p])
 
 const canvas = document.getElementById('canvas')
 const ctx = canvas.getContext('2d')
@@ -45,10 +47,10 @@ const step = t1 => t2 => {
 //Key Events
 window.addEventListener('keydown', e => {
   switch (e.key) {
-    case 'w': case 'h': case 'ArrowUp': state = enqueue(state, NORTH); break
-    case 'a': case 'j': case 'ArrowLeft': state = enqueue(state, WEST); break
-    case 's': case 'k': case 'ArrowDown': state = enqueue(state, SOUTH); break
-    case 'd': case 'l': case 'ArrowRight': state = enqueue(state, EAST); break
+    case 'w': case 'h': case 'ArrowUp': state = Snake.enqueue(state, Snake.NORTH); break
+    case 'a': case 'j': case 'ArrowLeft': state = Snake.enqueue(state, Snake.WEST); break
+    case 's': case 'k': case 'ArrowDown': state = Snake.enqueue(state, Snake.SOUTH); break
+    case 'd': case 'l': case 'ArrowRight': state = Snake.enqueue(state, Snake.EAST); break
   }
 })
 
